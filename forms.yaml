@@ -1,0 +1,10 @@
+forms:
+- name: test
+  type: awx
+  roles:
+  - public
+  categories:
+  - avd
+  fields:
+  - name: AVD Name
+    type: text
