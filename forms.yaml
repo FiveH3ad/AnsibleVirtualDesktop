@@ -36,7 +36,12 @@ forms: # a list of forms
         - Customer 2
         default: __auto__
       - type: expression
+        name: organization_id
+        label: Organization ID
+        expression: "fn.fnRestJwtSecure('get', 'https://your-awx-instance/api/v2/organizations/?search=$(customer_full)', '', 'awx_api_credential', '[.results[] | select(.name == \"$(customer_full)\").id]')"
+        hide: true
+      - type: expression
         name: subscription_id
         label: Subscription ID
         default: __auto__
-        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/survey_specs?customer=$(customer_full)','','awx_rest','[.results[].subscription_ids]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/{id}/survey_spec/','','awx_rest','[.results[].subscription_ids]')"
