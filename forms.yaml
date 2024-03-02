@@ -1,12 +1,13 @@
 categories:
-- name: Default
-  icon: bars
+  - name: Default
+    icon: bars
 roles:
   - name: admin
     groups:
       - local/admins
   - name: public
     groups: []
+constants: {}
 forms:
 - name: test
   type: awx
@@ -17,4 +18,3 @@ forms:
   fields:
   - name: AVD Name
     type: text
-    
