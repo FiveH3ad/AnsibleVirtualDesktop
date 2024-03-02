@@ -26,7 +26,6 @@ forms: # a list of forms
     type: awx
     credentials:
       awx_rest: 'awx' # Define your AWX REST API credential name here
-
     fields:
       - type: enum
         name: customer_full
@@ -38,7 +37,7 @@ forms: # a list of forms
       - type: expression
         name: organization_id
         label: Organization ID
-        expression: "fn.fnRestJwtSecure('get', 'https://your-awx-instance/api/v2/organizations/?search=$(customer_full)', '', 'awx_api_credential', '[.results[] | select(.name == \"$(customer_full)\").id]')"
+        expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/?search=$(customer_full)', '', 'awx_rest', '[.results[] | select(.name == \"$(customer_full)\").id]')"
         hide: true
       - type: expression
         name: subscription_id
