@@ -40,7 +40,11 @@ forms: # a list of forms
         expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/?search=$(customer_full)', '', 'awx_rest', '[.results[] | select(.name == \"$(customer_full)\").id]')"
         hide: true
       - type: expression
+        name: vm_create_workflow_id
+        hide: true
+        expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/$(organization_id)/workflow_job_templates/?search=vm_create', '', 'awx_rest', '[.results[0]).id]')"
+      - type: expression
         name: subscription_id
         label: Subscription ID
         default: __auto__
-        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/{id}/survey_spec/','','awx_rest','[.results[].subscription_ids]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(organization_id)/survey_spec/','','awx_rest','[.results[].subscription_ids]')"
