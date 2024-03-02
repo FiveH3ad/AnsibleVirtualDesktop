@@ -78,13 +78,13 @@ forms: # a list of forms
       - type: enum
         name: os_disk_size
         label: OS Disk Size
-        values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"os_disk_size_gb\").choices][]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"os_disk_size_gb\").choices][]')"
         default: __auto__
         help: "Size of the OS Disk in GB"
       - type: enum
         name: os_version
         label: Windows Server Version
-        values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"os_version\").choices][]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"os_version\").choices][]')"
         default: __auto__
         help: 
       - type: enum
@@ -92,7 +92,7 @@ forms: # a list of forms
         label: Environment
         default: __auto__
         help: "Environment of the VM"
-        values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_environment\").choices][]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_environment\").choices][]')"
       - type: text
         name: tag_purpose
         label: Purpose
@@ -116,19 +116,19 @@ forms: # a list of forms
       - type: enum
         name: tag_backup
         label: Backup
-        values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_backup\").choices][]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_backup\").choices][]')"
         default: __auto__
         help: "Backup Schedule"
       - type: enum
         name: tag_patching
         label: Patching
-        values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_patching\").choices][]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_patching\").choices][]')"
         default: __auto__
         help: "Patching Schedule"
       - type: enum
         name: tag_business_critical
         label: Business Critical
-        values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_business_critical\").choices][]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_business_critical\").choices][]')"
         default: __auto__
         help: "Is the VM Business Critical"
       - type: text
