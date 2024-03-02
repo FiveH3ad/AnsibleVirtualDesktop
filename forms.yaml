@@ -86,7 +86,7 @@ forms: # a list of forms
         label: Windows Server Version
         expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"os_version\").choices][]')"
         default: __auto__
-        help: 
+        help: "Windows Server Version"
       - type: enum
         name: tag_environment
         label: Environment
