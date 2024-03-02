@@ -9,17 +9,19 @@ roles: # a list of roles
     groups: []
 constants: {} # free objects to re-use over all forms
 forms: # a list of forms
-  - name: Demo Form
+  - name: Create Azure Windows VM
     showHelp: true
     help: >
-      This is a demo form
+      This form creates a new Azure Windows VM with default configurations installed.
     roles:
       - public
-    description: A simple form
+    description: Creates new Azure Windows VM
     categories:
-      - Demo
-    icon: heart
-    template: demo
+      - Azure
+      - Virtual Machines
+      - Windows
+    icon: desktop
+    template: demo2
     type: awx
     fields:
       - type: text
