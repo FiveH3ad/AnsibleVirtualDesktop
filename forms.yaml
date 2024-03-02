@@ -1,20 +1,27 @@
-categories:
+categories: # a list of categories to group forms
   - name: Default
     icon: bars
-roles:
+roles: # a list of roles
   - name: admin
     groups:
       - local/admins
   - name: public
     groups: []
-constants: {}
-forms:
-  - name: test
-    type: awx
+constants: {} # free objects to re-use over all forms
+forms: # a list of forms
+  - name: Demo Form
+    showHelp: true
+    help: >
+      This is a demo form
     roles:
       - public
+    description: A simple form
     categories:
-      - avd
+      - Demo
+    icon: heart
+    playbook: demo_playbooks.yml
+    type: ansible
     fields:
-      - name: AVD Name
-        type: text
+      - type: text
+        name: username
+        label: Username
