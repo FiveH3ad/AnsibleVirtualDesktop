@@ -47,4 +47,4 @@ forms: # a list of forms
         name: subscription_id
         label: Subscription ID
         default: __auto__
-        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec | select(.variable == resource_group).choices]')"
+        expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec | select(.variable == \"resource_group\").choices]')"
