@@ -2,6 +2,6 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: debug var username
+    - name: Debug var username
       debug:
-        msg: "username is {{ username }}" 
+        msg: "username is {{ username }}"

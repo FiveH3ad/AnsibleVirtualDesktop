@@ -19,8 +19,8 @@ forms: # a list of forms
     categories:
       - Demo
     icon: heart
-    playbook: demo_playbooks.yml
-    type: ansible
+    template: demo
+    type: awx
     fields:
       - type: text
         name: username
