@@ -64,6 +64,11 @@ forms: # a list of forms
         default: __auto__
         help: "Resource Group for the VM"
         expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"resource_group\").choices][]')"
+      - type: text
+        name: new_resource_group
+        label: New Resource Group
+        help: "New Resource Group for the VM"
+        dependencies: resource_group==new
       - type: enum
         name: virtual_network
         label: Virtual Network
