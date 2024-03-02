@@ -68,7 +68,10 @@ forms: # a list of forms
         name: new_resource_group
         label: New Resource Group
         help: "New Resource Group for the VM"
-        dependencies: resource_group==new
+        dependencies:
+        - name: resource_group
+          values:
+          - new
       - type: enum
         name: virtual_network
         label: Virtual Network
