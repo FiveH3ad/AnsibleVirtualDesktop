@@ -51,93 +51,93 @@ forms: # a list of forms
       - type: text
         name: vm_name
         label: VM Name
-        description: "Name of the VM"
+        help: "Name of the VM"
       - type: enum
         name: location
         label: Location
         default: __auto__
-        description: "Location of the VM"
+        help: "Location of the VM"
         expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"location\").choices][]')"
       - type: enum
         name: resource_group
         label: Resource Group
         default: __auto__
-        description: "Resource Group for the VM"
+        help: "Resource Group for the VM"
         expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"resource_group\").choices][]')"
       - type: enum
         name: virtual_network
         label: Virtual Network
         expression: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"vnet\").choices][]')"
         default: __auto__
-        description: "Virtual Network for the VM"
+        help: "Virtual Network for the VM"
       - type: text
         name: vm_size
         label: VM Size
-        description: "Size of the VM without 'Standard' prefix. Example: 'D2s_v3' instead of 'Standard_D2s_v3'"
+        help: "Size of the VM without 'Standard' prefix. Example: 'D2s_v3' instead of 'Standard_D2s_v3'"
         default: D2s_v4
       - type: enum
         name: os_disk_size
         label: OS Disk Size
         values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"os_disk_size_gb\").choices][]')"
         default: __auto__
-        description: "Size of the OS Disk in GB"
+        help: "Size of the OS Disk in GB"
       - type: enum
         name: os_version
         label: Windows Server Version
         values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"os_version\").choices][]')"
         default: __auto__
-        description: 
+        help: 
       - type: enum
         name: tag_environment
         label: Environment
         default: __auto__
-        description: "Environment of the VM"
+        help: "Environment of the VM"
         values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_environment\").choices][]')"
       - type: text
         name: tag_purpose
         label: Purpose
-        description: "Purpose of the VM"
+        help: "Purpose of the VM"
       - type: text
         name: tag_category
         label: Category
-        description: "Category of the VM"
+        help: "Category of the VM"
       - type: text
         name: tag_reservation
         label: Reservation
-        description: "Reservation of the VM"
+        help: "Reservation of the VM"
       - type: text
         name: tag_app_owner
         label: Application Owner
-        description: "Owner of the Application"
+        help: "Owner of the Application"
       - type: text
         name: tag_application
         label: Application Name
-        description: "Name of the Application"
+        help: "Name of the Application"
       - type: enum
         name: tag_backup
         label: Backup
         values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_backup\").choices][]')"
         default: __auto__
-        description: "Backup Schedule"
+        help: "Backup Schedule"
       - type: enum
         name: tag_patching
         label: Patching
         values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_patching\").choices][]')"
         default: __auto__
-        description: "Patching Schedule"
+        help: "Patching Schedule"
       - type: enum
         name: tag_business_critical
         label: Business Critical
         values: "fn.fnRestJwtSecure('get','https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/','','awx_rest','[.spec[] | select(.variable == \"tag_business_critical\").choices][]')"
         default: __auto__
-        description: "Is the VM Business Critical"
+        help: "Is the VM Business Critical"
       - type: text
         name: tag_legal_entity
         label: Legal Entity
-        description: "Legal Entity of the VM, used for tags"
+        help: "Legal Entity of the VM, used for tags"
       - type: text
         name: tags_string
         label: Additional Tags
         default: ""
-        description: "Additional Tags for the VM, name: test, purpose: application, tag2: tag2inhalt, etc."
+        help: "Additional Tags for the VM, name: test, purpose: application, tag2: tag2inhalt, etc."
         required: false
