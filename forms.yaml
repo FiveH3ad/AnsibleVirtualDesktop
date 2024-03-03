@@ -9,3 +9,4 @@ roles: # a list of roles
     groups: []
 constants:
   awx_instance: 'awx.aks.cloudlab01.net' # Add your AWX instance URL here
+
