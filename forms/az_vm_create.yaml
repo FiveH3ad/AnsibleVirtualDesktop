@@ -39,7 +39,7 @@
     - type: text
       name: vm_name
       label: VM Name(s)
-      help: "Name of the VM"
+      help: "Name of the VM, to create multiple VMs separate the names with a comma"
     - type: enum
       name: location
       label: Location
