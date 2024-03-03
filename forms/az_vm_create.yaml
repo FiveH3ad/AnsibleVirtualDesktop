@@ -38,7 +38,7 @@
       expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "resource_group").choices][]'')'
     - type: text
       name: vm_name
-      label: VM Name
+      label: VM Name(s)
       help: "Name of the VM"
     - type: enum
       name: location
@@ -137,7 +137,7 @@
       default: ""
       help: "Additional Tags for the VM, name: test, purpose: application, tag2: tag2inhalt, etc."
       required: false
-    - name: __template__  # use this special name to override the template from the form
+    - name: __template__
       label: tmp
       type: expression
       hide: true
