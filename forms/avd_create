@@ -1,0 +1,139 @@
+- name: Create Azure Windows VM
+  showHelp: true
+  help: >
+    This form creates a new Azure Windows VM with default configurations installed.
+  roles:
+    - public
+  description: Creates new Azure Windows VM
+  categories:
+    - Azure
+    - Virtual Machines
+    - Windows
+  icon: desktop
+  template: demo2
+  type: awx
+  credentials:
+    awx_rest: "awx" # Define your AWX REST API credential name here
+  fields:
+    - type: enum
+      name: customer_full
+      label: Customer
+      values:
+        - Customer 1
+        - Customer 2
+      default: __auto__
+    - type: expression
+      name: organization_id
+      label: Organization ID
+      expression: 'fn.fnRestJwtSecure(''get'', ''https://$(awx_instance)/api/v2/organizations/?search=$(customer_full)'', '''', ''awx_rest'', ''[.results[] | select(.name == "$(customer_full)").id]'')'
+      hide: true
+    - type: expression
+      name: vm_create_workflow_id
+      hide: true
+      expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/$(organization_id[0])/workflow_job_templates/?search=vm_create', '', 'awx_rest', '[.results[0].id]')"
+    - type: enum
+      name: subscription_id
+      label: Subscription ID
+      default: __auto__
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "resource_group").choices][]'')'
+    - type: text
+      name: vm_name
+      label: VM Name
+      help: "Name of the VM"
+    - type: enum
+      name: location
+      label: Location
+      default: __auto__
+      help: "Location of the VM"
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "location").choices][]'')'
+    - type: enum
+      name: resource_group
+      label: Resource Group
+      default: __auto__
+      help: "Resource Group for the VM"
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "resource_group").choices][]'')'
+    - type: text
+      name: new_resource_group
+      label: New Resource Group
+      help: "New Resource Group for the VM"
+      dependencies:
+        - name: resource_group
+          values:
+            - new
+    - type: enum
+      name: virtual_network
+      label: Virtual Network
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "vnet").choices][]'')'
+      default: __auto__
+      help: "Virtual Network for the VM"
+    - type: text
+      name: vm_size
+      label: VM Size
+      help: "Size of the VM without 'Standard' prefix. Example: 'D2s_v3' instead of 'Standard_D2s_v3'"
+      default: D2s_v4
+    - type: enum
+      name: os_disk_size
+      label: OS Disk Size
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "os_disk_size_gb").choices][]'')'
+      default: __auto__
+      help: "Size of the OS Disk in GB"
+    - type: enum
+      name: os_version
+      label: Windows Server Version
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "os_version").choices][]'')'
+      default: __auto__
+      help: "Windows Server Version"
+    - type: enum
+      name: tag_environment
+      label: Environment
+      default: __auto__
+      help: "Environment of the VM"
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "tag_environment").choices][]'')'
+    - type: text
+      name: tag_purpose
+      label: Purpose
+      help: "Purpose of the VM"
+    - type: text
+      name: tag_category
+      label: Category
+      help: "Category of the VM"
+    - type: text
+      name: tag_reservation
+      label: Reservation
+      help: "Reservation of the VM"
+    - type: text
+      name: tag_app_owner
+      label: Application Owner
+      help: "Owner of the Application"
+    - type: text
+      name: tag_application
+      label: Application Name
+      help: "Name of the Application"
+    - type: enum
+      name: tag_backup
+      label: Backup
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "tag_backup").choices][]'')'
+      default: __auto__
+      help: "Backup Schedule"
+    - type: enum
+      name: tag_patching
+      label: Patching
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "tag_patching").choices][]'')'
+      default: __auto__
+      help: "Patching Schedule"
+    - type: enum
+      name: tag_business_critical
+      label: Business Critical
+      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "tag_business_critical").choices][]'')'
+      default: __auto__
+      help: "Is the VM Business Critical"
+    - type: text
+      name: tag_legal_entity
+      label: Legal Entity
+      help: "Legal Entity of the VM, used for tags"
+    - type: text
+      name: tags_string
+      label: Additional Tags
+      default: ""
+      help: "Additional Tags for the VM, name: test, purpose: application, tag2: tag2inhalt, etc."
+      required: false
