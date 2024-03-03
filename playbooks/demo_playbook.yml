@@ -1,7 +1,0 @@
-- name: Run local
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - name: Debug var username
-      debug:
-        msg: "username is {{ username }}"
