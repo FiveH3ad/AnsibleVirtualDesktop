@@ -61,7 +61,7 @@
           values:
             - new
     - type: enum
-      name: virtual_network
+      name: vnet
       label: Virtual Network
       expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "vnet").choices][]'')'
       default: __auto__
@@ -72,7 +72,7 @@
       help: "Size of the VM without 'Standard' prefix. Example: 'D2s_v3' instead of 'Standard_D2s_v3'"
       default: D2s_v4
     - type: enum
-      name: os_disk_size
+      name: os_disk_size_gb
       label: OS Disk Size
       expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "os_disk_size_gb").choices][]'')'
       default: __auto__
