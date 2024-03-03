@@ -13,7 +13,7 @@
   template: demo2
   type: awx
   credentials:
-    awx_rest: "awx" # Define your AWX REST API credential name here
+    awx_rest: "awx"
   fields:
     - type: enum
       name: customer_full
@@ -31,14 +31,9 @@
       name: vm_create_workflow_id
       hide: true
       expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/$(organization_id[0])/workflow_job_templates/?search=vm_create', '', 'awx_rest', '[.results[0].id]')"
-    - type: enum
-      name: subscription_id
-      label: Subscription ID
-      default: __auto__
-      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "resource_group").choices][]'')'
     - type: text
       name: vm_name
-      label: VM Name(s)
+      label: VM Name
       help: "Name of the VM, to create multiple VMs separate the names with a comma"
     - type: enum
       name: location
