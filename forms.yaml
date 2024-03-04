@@ -2,9 +2,11 @@ categories: # a list of categories to group forms
   - name: Default
     icon: bars
   - name: Azure
-    icon: microsoft
-  - name: Landing Zones
     icon: cloud
+  - name: Landing Zones
+    icon: map
+  - name: Virtual Machines
+    icon: desktop
 roles: # a list of roles
   - name: admin
     groups:
