@@ -26,4 +26,8 @@
       label: Organization ID
       expression: 'fn.fnRestJwtSecure(''get'', ''https://$(awx_instance)/api/v2/organizations/?search=$(customer_full)'', '''', ''awx_rest'', ''[.results[] | select(.name == "$(customer_full)").id]'')'
       hide: true
-    - type: 
+    - type: enum
+      name: subscription_id
+      expression: "fn.fnRestJwtSecure('get','https://sadevchnawx05.table.core.windows.net/CustomerSubscriptions()?$filter=PartitionKey%20eq%20%27Customer%201%27&sv=2022-11-02&ss=t&srt=sco&sp=rl&se=2024-04-06T20:42:31Z&st=2024-03-04T13:42:31Z&spr=https&sig=l7OzeDWu5DbLpeT%2BzBJ3xP6ARLMU6YUx1kvOmMEGlkw%3D','','awx_rest','[.value[].RowKey]')"
+      default: __auto__
+      label: Subscription ID
