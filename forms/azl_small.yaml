@@ -17,9 +17,16 @@
     - type: enum
       name: customer_full
       label: Customer
-      values:
-        - Customer 1
-        - Customer 2
+      expression: >
+        fn.fnRestAdvanced(
+          'get',
+          '$(storage_account_url)CustomerSubscriptions()$(storage_account_sas)',
+          '',
+          {'Accept':'application/json'},
+          '[.value[] | {customer: .PartitionKey}] | unique_by(.customer)',
+          {},
+          false
+        )
       default: __auto__
     - type: expression
       name: organization_id
@@ -33,7 +40,7 @@
           'get',
           'https://sadevchnawx05.table.core.windows.net/CustomerSubscriptions()?$filter=PartitionKey%20eq%20%27Customer%201%27&sv=2022-11-02&ss=t&srt=sco&sp=rwdlacu&se=2024-03-04T22:18:28Z&st=2024-03-04T14:18:28Z&spr=https&sig=FEwPEz936MEN2pKWqEz3gRRGCFtnqv%2B4f2KVHdwEOX4%3D',
           '',
-          '',
+          {'Accept':'application/json'},
           '[.value[].RowKey]',
           {},
           false
