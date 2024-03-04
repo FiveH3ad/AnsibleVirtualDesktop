@@ -1,0 +1,29 @@
+- name: Deploy Azure Landing Zone Enterprise Scale for small business
+  showHelp: true
+  help: >
+    This form creates a new Azure Landing Zone Enterprise Scale for small business
+  roles:
+    - public
+  description: Creates new Azure Landing Zone Enterprise Scale for small business
+  categories:
+    - Azure
+    - Landing Zones
+  icon: desktop
+  template: demo2
+  type: awx
+  credentials:
+    awx_rest: "awx"
+  fields:
+    - type: enum
+      name: customer_full
+      label: Customer
+      values:
+        - Customer 1
+        - Customer 2
+      default: __auto__
+    - type: expression
+      name: organization_id
+      label: Organization ID
+      expression: 'fn.fnRestJwtSecure(''get'', ''https://$(awx_instance)/api/v2/organizations/?search=$(customer_full)'', '''', ''awx_rest'', ''[.results[] | select(.name == "$(customer_full)").id]'')'
+      hide: true
+    - type: 

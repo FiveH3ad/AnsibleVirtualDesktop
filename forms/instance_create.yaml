@@ -1,19 +1,17 @@
-- name: Create Azure Windows VM
+- name: Create new instance
   showHelp: true
   help: >
-    This form creates a new Azure Windows VM with default configurations installed.
+    This form creates a new Instance for a customer
   roles:
     - public
   description: Creates new Azure Windows VM
   categories:
     - Azure
-    - Virtual Machines
-    - Windows
   icon: desktop
   template: demo2
   type: awx
   credentials:
-    awx_rest: "awx" # Define your AWX REST API credential name here
+    awx_rest: "awx"
   fields:
     - type: enum
       name: customer_full
@@ -30,16 +28,7 @@
     - type: expression
       name: vm_create_workflow_id
       hide: true
-      expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/$(organization_id[0])/workflow_job_templates/?search=vm_create', '', 'awx_rest', '[.results[0].id]')"
-    - type: enum
-      name: subscription_id
-      label: Subscription ID
-      default: __auto__
-      expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "resource_group").choices][]'')'
-    - type: text
-      name: vm_name
-      label: VM Name
-      help: "Name of the VM"
+      expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/$(organization_id[0])/workflow_job_templates/?search=instance-create', '', 'awx_rest', '[.results[0].id]')"
     - type: enum
       name: location
       label: Location
@@ -61,7 +50,7 @@
           values:
             - new
     - type: enum
-      name: virtual_network
+      name: vnet
       label: Virtual Network
       expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "vnet").choices][]'')'
       default: __auto__
@@ -72,7 +61,7 @@
       help: "Size of the VM without 'Standard' prefix. Example: 'D2s_v3' instead of 'Standard_D2s_v3'"
       default: D2s_v4
     - type: enum
-      name: os_disk_size
+      name: os_disk_size_gb
       label: OS Disk Size
       expression: 'fn.fnRestJwtSecure(''get'',''https://$(awx_instance)/api/v2/workflow_job_templates/$(vm_create_workflow_id[0])/survey_spec/'','''',''awx_rest'',''[.spec[] | select(.variable == "os_disk_size_gb").choices][]'')'
       default: __auto__
@@ -137,3 +126,8 @@
       default: ""
       help: "Additional Tags for the VM, name: test, purpose: application, tag2: tag2inhalt, etc."
       required: false
+    - name: __template__
+      label: tmp
+      type: expression
+      hide: true
+      expression: "fn.fnRestJwtSecure('get', 'https://$(awx_instance)/api/v2/organizations/$(organization_id[0])/workflow_job_templates/?search=vm_create', '', 'awx_rest', '[.results[0].name]')"
