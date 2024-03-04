@@ -38,7 +38,7 @@
       expression: >
         fn.fnRestAdvanced(
           'get',
-          '$(storage_account_url)CustomerSubscriptions()?$filter=PartitionKey%20eq%20%27' + encodeURIComponent($(customer_full)) + '%27&$(storage_account_sas)',
+          '$(storage_account_url)CustomerSubscriptions()?$filter=PartitionKey%20eq%20%27' + encodeURI('$(customer_full)') + '%27&$(storage_account_sas)',
           '',
           {'Accept':'application/json'},
           '[.value[].RowKey]',
