@@ -61,3 +61,55 @@
         )
       label: Corporate subscription
       default: __auto__
+    - type: text
+      name: resource_prefix
+      label: Resource prefix
+      help: "Resource prefix for the Landing Zone"
+    - type: enum
+      name: location
+      label: Location
+      default: __auto__
+      help: "Location of the Landing Zone"
+      values:
+        - Switzerland North
+        - West Europe
+    - type: boolean
+      name: deploy_virtual_desktop
+      label: Deploy Virtual Desktop Management Group
+      help: "Deploy Virtual Desktop Management Group"
+      default: false
+    - type: boolean
+      name: deploy_online
+      label: Deploy Online Management Group
+      help: "Deploy Online Management Group"
+      default: false
+    - type: text
+      name: virtual_network_hub_address_space
+      label: Virtual Network Hub Address Space
+      help: "Virtual Network Hub Address Space"
+      default: "10.10.0.0/22"
+    - type: text
+      name: subnet_az_fw_address_space
+      label: Subnet AZ FW Address Space
+      help: "Subnet AZ FW Address Space"
+      default: "10.10.0.0/26"
+    - type: text
+      name: subnet_appgw_address_space
+      label: Subnet App Gateway Address Space
+      help: "Subnet App Gateway Address Space"
+      default: "10.10.0.64/26"
+    - type: text
+      name: subnet_az_bst_address_space
+      label: Subnet AZ BST Address Space
+      help: "Subnet AZ BST Address Space"
+      default: "10.10.0.128/26"
+    - type: text
+      name: subnet_az_gw_address_space
+      label: Subnet AZ GW Address Space
+      help: "Subnet AZ GW Address Space"
+      default: "10.10.1.0/24"
+    - type: text
+      name: subnet_srv_address_space
+      label: Subnet Server Address Space
+      help: "Subnet Server Address Space"
+      default: "10.10.2.0/24"
