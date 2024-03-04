@@ -34,7 +34,7 @@
       expression: 'fn.fnRestJwtSecure(''get'', ''https://$(awx_instance)/api/v2/organizations/?search=$(customer_full)'', '''', ''awx_rest'', ''[.results[] | select(.name == "$(customer_full)").id]'')'
       hide: true
     - type: enum
-      name: subscription_ids
+      name: platform_subscription
       expression: >
         fn.fnRestAdvanced(
           'get',
@@ -45,5 +45,19 @@
           {},
           false
         )
-      label: Subscriptions
+      label: Platform subscription
+      default: __auto__
+    - type: enum
+      name: corp_subscription
+      expression: >
+        fn.fnRestAdvanced(
+          'get',
+          '$(storage_account_url)CustomerSubscriptions()?$filter=PartitionKey%20eq%20%27' + encodeURI('$(customer_full)') + '%27&$(storage_account_sas)',
+          '',
+          {'Accept':'application/json'},
+          '[.value[].RowKey]',
+          {},
+          false
+        )
+      label: Corporate subscription
       default: __auto__
