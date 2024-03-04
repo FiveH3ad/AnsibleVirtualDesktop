@@ -38,7 +38,7 @@
       expression: >
         fn.fnRestAdvanced(
           'get',
-          'https://sadevchnawx05.table.core.windows.net/CustomerSubscriptions()?$filter=PartitionKey%20eq%20%27Customer%201%27&sv=2022-11-02&ss=t&srt=sco&sp=rwdlacu&se=2024-03-04T22:18:28Z&st=2024-03-04T14:18:28Z&spr=https&sig=FEwPEz936MEN2pKWqEz3gRRGCFtnqv%2B4f2KVHdwEOX4%3D',
+          '$(storage_account_url)CustomerSubscriptions()?$filter=PartitionKey%20eq%20%27' + encodeURIComponent($(customer_full)) + '%27&$(storage_account_sas)',
           '',
           {'Accept':'application/json'},
           '[.value[].RowKey]',
