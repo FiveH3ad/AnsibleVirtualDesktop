@@ -20,7 +20,7 @@
       expression: >
         fn.fnRestAdvanced(
           'get',
-          '$(storage_account_url)CustomerSubscriptions()$(storage_account_sas)',
+          '$(storage_account_url)CustomerSubscriptions()?$(storage_account_sas)',
           '',
           {'Accept':'application/json'},
           '[.value[] | {customer: .PartitionKey}] | unique_by(.customer)',
