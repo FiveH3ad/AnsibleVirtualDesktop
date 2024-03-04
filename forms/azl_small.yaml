@@ -73,16 +73,10 @@
       values:
         - Switzerland North
         - West Europe
-    - type: boolean
+    - type: checkbox
       name: deploy_virtual_desktop
       label: Deploy Virtual Desktop Management Group
       help: "Deploy Virtual Desktop Management Group"
-      default: false
-    - type: boolean
-      name: deploy_online
-      label: Deploy Online Management Group
-      help: "Deploy Online Management Group"
-      default: false
     - type: text
       name: virtual_network_hub_address_space
       label: Virtual Network Hub Address Space
