@@ -16,4 +16,4 @@ roles: # a list of roles
 constants:
   awx_instance: 'awx.aks.cloudlab01.net' # Add your AWX instance URL here
   storage_account_url: 'https://sadevchnawx05.table.core.windows.net/'
-  storage_account_sas: 'sv=2022-11-02&ss=t&srt=sco&sp=rwdlacu&se=2024-03-04T22:18:28Z&st=2024-03-04T14:18:28Z&spr=https&sig=FEwPEz936MEN2pKWqEz3gRRGCFtnqv%2B4f2KVHdwEOX4%3D'
+  storage_account_sas: 'sv=2022-11-02&ss=t&srt=sco&sp=rlau&se=2024-03-31T14:42:28Z&st=2024-03-05T07:42:28Z&spr=https&sig=gjtMDVNpWr3fyGh5O6aLtDI8xI23%2B8oBV%2BPw0YnuwW4%3D'

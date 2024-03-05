@@ -9,7 +9,7 @@
     - Azure
     - Landing Zones
   icon: desktop
-  template: demo2
+  template: C1-AzureLandingZone_Small
   type: awx
   credentials:
     awx_rest: "awx"
